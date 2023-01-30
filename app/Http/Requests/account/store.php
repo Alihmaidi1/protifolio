@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\account;
 
+use App\Rules\checkPermission;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class login extends FormRequest
+class store extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +27,10 @@ class login extends FormRequest
     {
         return [
             
-            "email"=>"required|email|exists:users,email",
-            "password"=>"required"
+            "name"=>"required",
+            "email"=>"required|email|unique:users,email",
+            "password"=>"required",
+            "permission"=>["required",new checkPermission]
         ];
     }
 
@@ -38,8 +41,7 @@ class login extends FormRequest
             response()->json(["data"=>[],"message"=>$validator->errors()->first()],401)
 
         );
-
+        
     }
-
 
 }

@@ -16,4 +16,14 @@ use App\Http\Controllers\api\account;
 
 Route::post("/login", [account::class,"login"]);
 
+Route::group(["middleware" => ["auth:api"]], function () {
+
+    Route::post("/logout", [account::class, "logout"]);
+    Route::get("/profile",[account::class,"profile"]);
+    Route::post("/createuser",[account::class,"store"])->middleware("can:user");
+    Route::post("/updateuser", [account::class,"update"])->middleware("can:user");
+    Route::post("/deleteuser", [account::class,"delete"])->middleware("can:user");
+    Route::get("/getalluser", [account::class,"getalluser"])->middleware("can:user");
+
+});
 

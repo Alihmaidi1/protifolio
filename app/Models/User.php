@@ -23,8 +23,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        "permission"
     ];
 
+    public function getPermissionAttribute($value){
+
+        return json_decode($value);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

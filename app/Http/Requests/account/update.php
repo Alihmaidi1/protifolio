@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\account;
 
+use App\Rules\checkPermission;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class login extends FormRequest
+class update extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +26,11 @@ class login extends FormRequest
     public function rules()
     {
         return [
-            
-            "email"=>"required|email|exists:users,email",
-            "password"=>"required"
+
+            "id"=>"required|exists:users,id",
+            "email"=>"required|unique:users,email,".request()->id,
+            "name"=>"required",
+            "permission"=>["required",new checkPermission]
         ];
     }
 
@@ -38,8 +41,8 @@ class login extends FormRequest
             response()->json(["data"=>[],"message"=>$validator->errors()->first()],401)
 
         );
-
+        
+        
     }
-
 
 }

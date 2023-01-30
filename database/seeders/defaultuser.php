@@ -16,12 +16,13 @@ class defaultuser extends Seeder
      */
     public function run()
     {
-        User::create([
 
+        $permissions=json_encode(config("permission"));
+        User::create([
             "name"=>"Admin",
             "email"=>"alihmaidi095@gmail.com",
-            "password"=>Hash::make("ali450892")
-
+            "password"=>Hash::make("ali450892"),
+            "permission"=>$permissions
         ]);
     }
 }
