@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 function tokenInfo($email,$password,$provider){
 
@@ -21,4 +23,24 @@ function tokenInfo($email,$password,$provider){
 
 
 }
+
+
+    function saveimage($image){
+
+        $name = time().rand(1000000, 9999999) . "." . $image->getClientOriginalExtension();
+        Storage::disk("public")->putFileAs("temp",$image,$name);
+        return $name;
+
+
+    }
+
+
+    function movefile($from,$to){
+
+
+    File::move(public_path($from), public_path($to));
+
+        
+
+    }
 

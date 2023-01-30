@@ -13,4 +13,11 @@ class project extends Model
 
     public $fillable = ["name","url","image"];
     public $hidden = ["created_at","updated_at"];
+
+    public function getImageAttribute($value){
+
+        return public_path( $value);
+
+    }
 }
+
