@@ -14,10 +14,16 @@ class team extends Model
 
     public $hidden = ["created_at","updated_at"];
 
+    public function getImageAttribute($value){
+
+        return public_path( $value);
+
+    }
+
 
     public function experience(){
 
 
-        return $this->hasOne(experience::class, "team_id");
+        return $this->hasMany(experience::class, "team_id");
     }
 }

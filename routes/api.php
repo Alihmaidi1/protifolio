@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\account;
+use App\Http\Controllers\api\experience;
 use App\Http\Controllers\api\project;
+use App\Http\Controllers\api\team;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +34,21 @@ Route::group(["middleware" => ["auth:api"]], function () {
     Route::post("/updateproject",[project::class,"updateproject"])->middleware("can:project");
     Route::post("/deleteproject",[project::class,"deleteproject"])->middleware("can:project");
 
+    Route::post("/createteam", [team::class,"createteam"])->middleware("can:team");
+    Route::post("/updateteam",[team::class,"updateteam"])->middleware("can:team");
+    Route::post("/deleteteam",[team::class,"deleteteam"])->middleware("can:team");
+
+
+
+
+    Route::post("/createexperience", [experience::class,"createexperience"])->middleware("can:experinece");
+    Route::post("/updateexperience",[experience::class,"updateexperience"])->middleware("can:experinece");
+    Route::post("/deleteexperience",[experience::class,"deleteexperience"])->middleware("can:experinece");
+
+
 });
 
 Route::get("/getallproject",[project::class,"getallproject"]);
+Route::get("/getallteam",[team::class,"getallteam"]);
+Route::get("/getallexperience",[experience::class,"getallexperience"]);
 

@@ -10,12 +10,21 @@ class experinece extends Model
 {
     use HasFactory;
     use HasUuids;
-    public $fillable = ["name","precent"];
-    public $hidden = ["created_at", "updated_at"];
+    public $fillable = ["name","precent","team_id"];
+    public $hidden = ["created_at", "updated_at","team_id"];
     public function team(){
 
 
         return $this->belongsTo(team::class, "team_id");
-    } 
+    }
+
+    public $appends = ["team"];
+
+    public function getTeamAttribute(){
+
+        
+        return $this->team()->get();
+
+    }
 
 }
