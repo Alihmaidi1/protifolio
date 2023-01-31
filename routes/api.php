@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\account;
+use App\Http\Controllers\api\contactus;
 use App\Http\Controllers\api\experience;
 use App\Http\Controllers\api\project;
 use App\Http\Controllers\api\service;
@@ -53,7 +54,17 @@ Route::group(["middleware" => ["auth:api"]], function () {
     Route::post("/deleteservice",[service::class,"deleteservice"])->middleware("can:service");
 
 
+
+    Route::post("/deletecontantus",[contactus::class,"deletecontantus"])->middleware("can:message");
+
+    Route::get("/getallcontant",[contactus::class,"getallcontant"])->middleware("can:message");
+
+
 });
+
+Route::post("/createcontactus", [contactus::class, "createcontactus"]);
+
+
 
 Route::get("/getallproject",[project::class,"getallproject"]);
 Route::get("/getallteam",[team::class,"getallteam"]);
