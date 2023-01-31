@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\account;
 use App\Http\Controllers\api\experience;
 use App\Http\Controllers\api\project;
+use App\Http\Controllers\api\service;
 use App\Http\Controllers\api\team;
 
 /*
@@ -46,9 +47,16 @@ Route::group(["middleware" => ["auth:api"]], function () {
     Route::post("/deleteexperience",[experience::class,"deleteexperience"])->middleware("can:experinece");
 
 
+
+    Route::post("/createservice", [service::class,"createservice"])->middleware("can:service");
+    Route::post("/updateservice",[service::class,"updateservice"])->middleware("can:service");
+    Route::post("/deleteservice",[service::class,"deleteservice"])->middleware("can:service");
+
+
 });
 
 Route::get("/getallproject",[project::class,"getallproject"]);
 Route::get("/getallteam",[team::class,"getallteam"]);
 Route::get("/getallexperience",[experience::class,"getallexperience"]);
+Route::get("/getallservice",[service::class,"getallservice"]);
 
